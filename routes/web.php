@@ -12,5 +12,8 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return ['message' => 'Welcome to Morbido\'s Api!'];
 });
+
+$router->post('/datasets/upload', ['uses' => 'DatasetController@uploadDataset']);
+$router->get('/datasets', ['uses' => 'DatasetController@index']);
