@@ -19,7 +19,7 @@ class DatasetController extends Controller
 
         // Call Python REST ML.
         $morbidoClient = new MorbidoClient();
-        $morbidoResponse = $morbidoClient->doRequest('POST', '/dataset/describe', [
+        $morbidoResponse = $morbidoClient->doRequest('POST', '/dataset/shape', [
             'multipart' => [
                 [
                     'name' => 'dataset',
