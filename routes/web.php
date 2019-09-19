@@ -15,5 +15,8 @@ $router->get('/', function () use ($router) {
     return ['message' => 'Welcome to Morbido\'s Api!'];
 });
 
-$router->post('/datasets/upload', ['uses' => 'DatasetController@uploadDataset']);
 $router->get('/datasets', ['uses' => 'DatasetController@index']);
+$router->post('/datasets/columns', ['uses' => 'DatasetController@columns']);
+$router->post('/datasets/upload', ['uses' => 'DatasetController@uploadDataset']);
+
+$router->post('/forecasts/sarima', ['uses' => 'ForecastController@sarima']);

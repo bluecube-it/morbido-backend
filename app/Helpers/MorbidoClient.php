@@ -23,7 +23,7 @@ class MorbidoClient {
         try {
             $response = $this->client->request($method, $this->url . $path, $body);   
             
-            return json_decode($response->getBody());
+            return json_decode($response->getBody()->getContents(), true);
         } catch (RequestException $e) {
             return $e->getResponse();
         }

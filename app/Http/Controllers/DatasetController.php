@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Dataset;
 use Illuminate\Http\Request;
 use App\Helpers\MorbidoClient;
@@ -23,7 +24,7 @@ class DatasetController extends Controller
             'multipart' => [
                 [
                     'name' => 'dataset',
-                    'contents' => $request->file('dataset'),
+                    'contents' => Storage::get($path),
                 ],
             ]
         ]);   
@@ -32,10 +33,30 @@ class DatasetController extends Controller
             'original_name' => $request->dataset->getClientOriginalName(),
             'unique_name' => $path,
             'size' => $request->dataset->getSize(),
-            'columns' => $morbidoResponse->columns,
-            'rows' => $morbidoResponse->rows,
+            'columns' => $morbidoResponse['columns'],
+            'rows' => $morbidoResponse['rows'],
         ]);
 
         return $dataset;
+    }
+
+    public function columns(Request $request)
+    {
+        //print_r($request->all());exit();
+        $dataset = Storage::get($request->dataset);
+
+        // Call Python REST ML.
+        $morbidoClient = new MorbidoClient();
+
+        $morbidoResponse = $morbidoClient->doRequest('POST', '/dataset/columns', [
+            'multipart' => [
+                [
+                    'name' => 'dataset',
+                    'contents' => $dataset,
+                ],
+            ]
+        ]); 
+
+        return $morbidoResponse;
     }
 }
