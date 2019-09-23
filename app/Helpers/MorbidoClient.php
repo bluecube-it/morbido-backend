@@ -15,7 +15,7 @@ class MorbidoClient {
     public function __construct()
     {
         $this->client = new Client();
-        $this->url = 'http://localhost:5000';
+        $this->url = 'http://ml-engine';
     }
 
     public function doRequest($method, $path, $body = [])
