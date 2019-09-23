@@ -98,6 +98,7 @@ $app->configure('auth');
 \Dusterio\LumenPassport\LumenPassport::routes($app, ['prefix' => 'v1/oauth']);
 \Dusterio\LumenPassport\LumenPassport::tokensExpireIn(\Carbon\Carbon::now()->addMinutes(5)); 
 
+\Laravel\Passport\Passport::loadKeysFrom(storage_path());
 \Laravel\Passport\Passport::refreshTokensExpireIn(\Carbon\Carbon::now()->addMinutes(60));
 
 $app->router->group([
