@@ -1,6 +1,8 @@
   
 FROM php:7.3.8-fpm-alpine
 
+ARG ML_ENGINE_ENDPOINT
+
 LABEL mantainer="developer@fabriziocafolla.com"
 LABEL description="Production container"
 
