@@ -29,6 +29,10 @@ class DatasetController extends Controller
             ]
         ]);   
 
+        if ($morbidoResponse instanceof \GuzzleHttp\Exception\RequestException) {
+            throw new \Exception($morbidoResponse->getMessage());
+        }
+
         $dataset = Dataset::create([
             'original_name' => $request->dataset->getClientOriginalName(),
             'unique_name' => $path,
@@ -42,7 +46,6 @@ class DatasetController extends Controller
 
     public function columns(Request $request)
     {
-        //print_r($request->all());exit();
         $dataset = Storage::get($request->dataset);
 
         // Call Python REST ML.
@@ -56,6 +59,10 @@ class DatasetController extends Controller
                 ],
             ]
         ]); 
+
+        if ($morbidoResponse instanceof \GuzzleHttp\Exception\RequestException) {
+            throw new \Exception($morbidoResponse->getMessage());
+        }
 
         return $morbidoResponse;
     }

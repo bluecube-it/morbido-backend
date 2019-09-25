@@ -43,6 +43,10 @@ class ForecastController extends Controller
             ]
         ]);  
 
+        if ($morbidoResponse instanceof \GuzzleHttp\Exception\RequestException) {
+            throw new \Exception($morbidoResponse->getMessage());
+        }
+
         foreach ($morbidoResponse['data'] as &$item) {
             $item['date'] = Carbon::parse($item['date'])->toDateString();
             $item = array_values($item);
