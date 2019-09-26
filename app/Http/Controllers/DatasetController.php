@@ -64,14 +64,12 @@ class DatasetController extends Controller
             throw new \Exception($morbidoResponse->getMessage());
         }
 
+        foreach ($morbidoResponse['data'] as &$item) {
+            $item['date'] = Carbon::parse($item['date'])->toDateString();
+            $item = array_values($item);
+        }
+        $morbidoResponse['name'] = 'Dataset';
+
         return $morbidoResponse;
-    }
-
-    public function jsonDatatset(Request $request) {
-        $dataset = Storage::get($request->dataset);
-
-        $array = array_map("str_getcsv", explode(",", $dataset));
-        
-        return json_encode($array);
     }
 }
