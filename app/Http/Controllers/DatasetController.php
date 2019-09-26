@@ -66,4 +66,12 @@ class DatasetController extends Controller
 
         return $morbidoResponse;
     }
+
+    public function jsonDatatset(Request $request) {
+        $dataset = Storage::get($request->dataset);
+
+        $array = array_map("str_getcsv", explode(",", $dataset));
+        
+        return json_encode($array);
+    }
 }
