@@ -64,6 +64,12 @@ class DatasetController extends Controller
             throw new \Exception($morbidoResponse->getMessage());
         }
 
+        foreach ($morbidoResponse['data'] as &$item) {
+            $item['date'] = Carbon::parse($item['date'])->toDateString();
+            $item = array_values($item);
+        }
+        $morbidoResponse['data']['name'] = 'Dataset';
+
         return $morbidoResponse;
     }
 }
