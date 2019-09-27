@@ -52,8 +52,22 @@ class ForecastController extends Controller
             $item = array_values($item);
         }
 
+        foreach ($morbidoResponse['dataset'] as &$item) {
+            $item['date'] = Carbon::parse($item['date'])->toDateString();
+            $item = array_values($item);
+        }
+
         $morbidoResponse['name'] = 'Prediction';
 
-        return $morbidoResponse;
+        return [
+            [
+                'data' => $morbidoResponse['data'],
+                'name' => 'Prediction',
+            ],
+            [
+                'data' => $morbidoResponse['dataset'],
+                'name' => 'Dataset',
+            ]
+        ];
     }
 }
