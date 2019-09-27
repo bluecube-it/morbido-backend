@@ -68,7 +68,7 @@ class DatasetController extends Controller
             $item['date'] = Carbon::parse($item['date'])->toDateString();
             $item = array_values($item);
         }
-        $morbidoResponse['name'] = 'Dataset';
+        $morbidoResponse['data']['name'] = 'Dataset';
 
         return $morbidoResponse;
     }
