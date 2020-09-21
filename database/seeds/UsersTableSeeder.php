@@ -12,10 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (! User::whereEmail('info@morbido.ml')->first()) {
+        if (! User::whereEmail('admin@example.com')->first()) {
             $user = User::create([
                 'name' => 'Administrator',
-                'email' => 'info@morbido.ml',
+                'email' => 'admin@example.com',
                 'password' => app('hash')->make('password'),
             ]);
         }
