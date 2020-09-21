@@ -34,7 +34,7 @@ RUN apk add --no-cache git
 WORKDIR /var/www
 
 # Copy application file in image
-RUN git clone http://gitlab.internal.bluecube.it/Renny/morbido-backend.git
+RUN git clone https://github.com/bluecube-it/morbido-backend.git
 
 WORKDIR /var/www/morbido-backend
 
